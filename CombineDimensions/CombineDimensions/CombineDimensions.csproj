@@ -43,8 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractDimension.cs" />
-    <Compile Include="IDimension.cs" />
-    <Compile Include="LastDimension.cs" />
+    <Compile Include="ListExtensions.cs" />
     <Compile Include="Version.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Program.cs" />

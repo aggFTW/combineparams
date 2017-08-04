@@ -19,6 +19,7 @@ namespace CombineDimensions
                 {
                     var l = version.Merge().ToList();
                     Console.WriteLine(l.ToPrettyString());
+                    Console.WriteLine(l.ToTypeString());
                 }
             }
             catch (IndexOutOfRangeException)

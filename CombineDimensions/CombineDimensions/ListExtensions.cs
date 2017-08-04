@@ -12,5 +12,10 @@ namespace CombineDimensions
         {
             return string.Format("[{0}]", string.Join(", ", list));
         }
+
+        public static string ToTypeString(this IList<object> list)
+        {
+            return string.Format("[{0}]", string.Join(", ", list.Select(x => x.GetType().ToString())));
+        }
     }
 }
