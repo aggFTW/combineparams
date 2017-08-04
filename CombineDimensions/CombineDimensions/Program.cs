@@ -10,10 +10,23 @@ namespace CombineDimensions
     {
         static void Main(string[] args)
         {
-            //var l = new Location<LastDimension>(new LastDimension());
-            //var v = new MyVersion<Location<LastDimension>>(l);
+            var location = new Location();
+            var version = new MyVersion(location);
 
-            Console.WriteLine(new List<object> { "aloha", 1 });
+            try
+            {
+                while(true)
+                {
+                    var l = version.Merge().ToList();
+                    Console.WriteLine(l.ToPrettyString());
+                }
+            }
+            catch (IndexOutOfRangeException)
+            {
+                Console.WriteLine("I'm done");
+            }
+
+            // Console.WriteLine(new List<object> { "aloha", 1 });
         }
     }
 }

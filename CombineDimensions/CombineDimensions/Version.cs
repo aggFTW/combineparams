@@ -1,24 +1,20 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿namespace CombineDimensions
+{
+    using System.Collections.Generic;
 
-//namespace CombineDimensions
-//{
-//    public class MyVersion<TNext> : AbstractDimension<double, TNext> where TNext : IDimension<object>
-//    {
-//        public const double One = 1.0;
+    public class MyVersion : AbstractDimension
+    {
+        public const double One = 1.0;
 
-//        public const double Two = 2.0;
+        public const double Two = 2.0;
 
-//        public MyVersion(TNext nextDimension) : base(nextDimension)
-//        {
-//        }
+        public MyVersion(AbstractDimension nextDimension = null) : base(nextDimension)
+        {
+        }
 
-//        public override IList<double> AllValues()
-//        {
-//            return new List<double> { One, Two};
-//        }
-//    }
-//}
+        public override IEnumerable<object> AllValues()
+        {
+            return new List<object> { One, Two };
+        }
+    }
+}
