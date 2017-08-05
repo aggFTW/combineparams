@@ -1,6 +1,0 @@
-C:\Users\alexg\dev\combineparams\CombineDimensions\CombineDimensions\bin\Debug\CombineDimensions.exe.config
-C:\Users\alexg\dev\combineparams\CombineDimensions\CombineDimensions\bin\Debug\CombineDimensions.exe
-C:\Users\alexg\dev\combineparams\CombineDimensions\CombineDimensions\bin\Debug\CombineDimensions.pdb
-C:\Users\alexg\dev\combineparams\CombineDimensions\CombineDimensions\obj\Debug\CombineDimensions.csprojResolveAssemblyReference.cache
-C:\Users\alexg\dev\combineparams\CombineDimensions\CombineDimensions\obj\Debug\CombineDimensions.exe
-C:\Users\alexg\dev\combineparams\CombineDimensions\CombineDimensions\obj\Debug\CombineDimensions.pdb

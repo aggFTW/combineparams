@@ -40,7 +40,7 @@ namespace CombineDimensions
 
                 var current = this.allValues.ElementAt(this.currentValue);
                 this.currentValue += 1;
-                return new List<object> { current };
+                yield return new List<object> { current };
             }
 
             try
