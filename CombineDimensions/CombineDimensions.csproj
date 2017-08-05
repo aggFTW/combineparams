@@ -44,7 +44,7 @@
   <ItemGroup>
     <Compile Include="AbstractDimension.cs" />
     <Compile Include="AbstractDimensionEnumerator.cs" />
-    <Compile Include="DimensionConcatenator.cs" />
+    <Compile Include="DimensionCombiner.cs" />
     <Compile Include="ListExtensions.cs" />
     <Compile Include="Version.cs" />
     <Compile Include="Location.cs" />

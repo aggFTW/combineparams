@@ -1,6 +1,8 @@
 ﻿namespace CombineDimensions
 {
+    using System;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
     public class DimensionCombiner
@@ -16,6 +18,14 @@
 
             public DimensionEnumerable(params AbstractDimension[] dimensions)
             {
+                // TODO Check that dimension is not null.
+
+                var seenDimensionObjects = new HashSet<AbstractDimension>();
+                if (dimensions.Any(dim => !seenDimensionObjects.Add(dim)))
+                {
+                    throw new NotSupportedException("There is at least 1 dimension object passed more than once as a parameter");
+                }
+
                 this.dimensions = dimensions;
             }
 
@@ -31,6 +41,8 @@
 
                     currentDimension = nextDimension;
                 }
+
+                currentDimension.NextDimension = null;
 
                 return new AbstractDimensionEnumerator(initialDimension);
             }
