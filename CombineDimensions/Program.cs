@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CombineDimensions
+﻿namespace CombineDimensions
 {
+    using System;
+    using System.Collections.Generic;
+
     class Program
     {
         static void Main(string[] args)

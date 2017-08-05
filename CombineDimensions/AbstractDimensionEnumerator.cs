@@ -1,9 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace CombineDimensions
+﻿namespace CombineDimensions
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    
     internal class AbstractDimensionEnumerator : IEnumerator<List<object>>
     {
         private readonly List<object> allValues;
@@ -20,6 +21,12 @@ namespace CombineDimensions
         public AbstractDimensionEnumerator(AbstractDimension dimension)
         {
             this.allValues = dimension.AllValues().ToList();
+
+            if (this.allValues.Count() < 1)
+            {
+                throw new NotSupportedException("Dimensions must have at least 1 value.");
+            }
+
             this.nextDimension = dimension.NextDimension;
 
             this.Reset();
