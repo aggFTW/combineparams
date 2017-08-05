@@ -8,10 +8,6 @@
 
         public const double Two = 2.0;
 
-        public MyVersion(AbstractDimension nextDimension = null) : base(nextDimension)
-        {
-        }
-
         public override List<object> AllValues()
         {
             return new List<object> { One, Two };

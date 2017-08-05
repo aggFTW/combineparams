@@ -8,10 +8,6 @@
 
         public const string West = "West";
 
-        public Location(AbstractDimension nextDimension = null) : base(nextDimension)
-        {
-        }
-
         public override List<object> AllValues()
         {
             return new List<object> { East, West };
