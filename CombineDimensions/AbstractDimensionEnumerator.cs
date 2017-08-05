@@ -48,6 +48,9 @@ namespace CombineDimensions
 
         public bool MoveNext()
         {
+            // This is a very verbose implementation, but I found it easy to reason through while writing it.
+            // I'm sure some if/else statements can be removed.
+
             if (this.nextDimension == null)
             {
                 if (this.IsOnLastElement())
