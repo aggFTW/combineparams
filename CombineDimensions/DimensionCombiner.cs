@@ -18,7 +18,7 @@
 
             public DimensionEnumerable(params AbstractDimension[] dimensions)
             {
-                // TODO Check that dimension is not null.
+                // TODO Check that dimensions is not null.
 
                 var seenDimensionObjects = new HashSet<AbstractDimension>();
                 if (dimensions.Any(dim => !seenDimensionObjects.Add(dim)))
