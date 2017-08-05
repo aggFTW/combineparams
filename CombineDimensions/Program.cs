@@ -13,21 +13,17 @@ namespace CombineDimensions
             var location = new Location();
             var version = new MyVersion(location);
 
-            try
+            foreach (var comb in location)
             {
-                while(true)
-                {
-                    var l = version.Merge().ToList();
-                    Console.WriteLine(l.ToPrettyString());
-                    Console.WriteLine(l.ToTypeString());
-                }
-            }
-            catch (IndexOutOfRangeException)
-            {
-                Console.WriteLine("I'm done");
+                var l = (List<object>)comb;
+                Console.WriteLine(l.ToPrettyString());
             }
 
-            // Console.WriteLine(new List<object> { "aloha", 1 });
+            foreach (var comb in version)
+            {
+                var l = (List<object>)comb;
+                Console.WriteLine(l.ToPrettyString());
+            }
         }
     }
 }

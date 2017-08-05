@@ -1,72 +1,88 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace CombineDimensions
 {
-    public abstract class AbstractDimension
+    public abstract class AbstractDimension : IEnumerable
     {
-        private readonly List<object> allValues;
         private readonly AbstractDimension nextDimension;
 
-        private int currentValue;
-        
         public AbstractDimension(AbstractDimension nextDimension = null)
         {
             this.nextDimension = nextDimension;
-            this.allValues = AllValues().ToList();
-            this.currentValue = 0;
         }
 
-        public abstract IEnumerable<object> AllValues();
+        public abstract List<object> AllValues();
 
-        /// <summary>
-        /// Returns possible values
-        /// </summary>
-        /// <remarks>
-        /// An IndexOutOfRangeException will be thrown to indicate that the end of
-        /// possible values has been reached.
-        /// </remarks>
-        /// <returns></returns>
-        public IEnumerable<object> Merge()
+        public IEnumerator GetEnumerator()
         {
-            if (this.nextDimension == null)
+            return new AbstractDimensionEnumerator(this, this.nextDimension);
+        }
+
+        private class AbstractDimensionEnumerator : IEnumerator<List<object>>
+        {
+            private readonly List<object> allValues;
+            private readonly IEnumerator nextDimensionEnumerator;
+
+            private int currentValue;
+
+            public AbstractDimensionEnumerator(AbstractDimension dimension, AbstractDimension nextDimension)
             {
-                if (this.currentValue > this.allValues.Count - 1)
+                this.allValues = dimension.AllValues().ToList();
+                this.currentValue = -1;
+
+                if (nextDimension != null)
                 {
-                    this.currentValue = 0;
-                    throw new IndexOutOfRangeException();
-                }
-
-                var current = this.allValues.ElementAt(this.currentValue);
-                this.currentValue += 1;
-                yield return new List<object> { current };
-            }
-
-            try
-            {
-                IEnumerable<object> nextDimensionMerge = this.nextDimension.Merge();
-                return new List<object> { this.allValues.ElementAt(this.currentValue) }.Concat(nextDimensionMerge);
-            }
-            catch(IndexOutOfRangeException)
-            {
-                if (this.currentValue >= this.allValues.Count - 1)
-                {
-                    // I've already reached the end of the list. I should stop iterating.
-                    // Because the next dimension has reached its last value,
-                    // reset mine too and throw to let parent know that I'm done.
-
-                    this.currentValue = 0;
-                    throw;
+                    this.nextDimensionEnumerator = nextDimension.GetEnumerator();
                 }
                 else
                 {
-                    // I'm still iterating. I should move on to the next value and ask 
-                    // for my own next iteration.
-
-                    this.currentValue += 1;
-                    return this.Merge();
+                    this.nextDimensionEnumerator = null;
                 }
+            }
+
+            public List<object> Current
+            {
+                get
+                {
+                    var current = this.allValues.ElementAt(this.currentValue);
+                    var currentList = new List<object> { current };
+
+                    if (this.nextDimensionEnumerator == null)
+                    {
+                        return currentList;
+                    }
+                    else
+                    {
+                        if (!this.nextDimensionEnumerator.MoveNext())
+                        {
+                            this.nextDimensionEnumerator.Reset();
+                        }
+
+                        List<object> nextDimensionCurrent = (List<object>)nextDimensionEnumerator.Current;
+                        return currentList.Concat(nextDimensionCurrent).ToList();
+                    }
+                }
+            }
+
+            public void Dispose() { }
+
+            public bool MoveNext()
+            {
+                this.currentValue += 1;
+                return (this.currentValue < this.allValues.Count);
+            }
+
+            public void Reset()
+            {
+                this.currentValue = -1;
+            }
+
+            object IEnumerator.Current
+            {
+                get { return this.Current; }
             }
         }
     }

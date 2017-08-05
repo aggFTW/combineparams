@@ -12,7 +12,7 @@
         {
         }
 
-        public override IEnumerable<object> AllValues()
+        public override List<object> AllValues()
         {
             return new List<object> { One, Two };
         }
